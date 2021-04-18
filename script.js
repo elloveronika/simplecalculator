@@ -1,9 +1,10 @@
-class Calculator{
+class Calculator {
     constructor(previousOperandTextElement , currentOperandTextElement){// this will take all the inputs and constructors
         this.previousOperandTextElement = previousOperandTextElement
         this.currentOperandTextElement = currentOperandTextElement
         this.clear()
     }//now we will create functions that will run when given each command, it will clear out our variables
+    
     clear() {
         this.currentOperand = ''
         this.previousOperand = ''
@@ -54,15 +55,16 @@ class Calculator{
     }
     getDisplayNumber(number){
         const stringNumber = number.toString()
-        const integerDigits =parseFloat(stringNumber.split('.')[0])
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
         const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
         if (isNaN(integerDigits)){
             integerDisplay = ''
         } else {
          integerDisplay = integerDigits.toLocaleString('en', {
-            maximumFractionDigits:0 })
+            maximumFractionDigits: 0 })
         }
-        if(decimalDigits != null){
+        if(decimalDigits != null) {
             return `${integerDisplay}.${decimalDigits}`
         }else{
             return integerDisplay
@@ -72,10 +74,11 @@ class Calculator{
         // if(isNaN(floatNumber)) return ''
         // return number.toLocaleString('en')
     updateDisplay() { //this will update the display
-        this.currentOperandTextElement.innerText = this.currentOperand //this current operand is being called  in append number and is being updated here?
+        this.currentOperandTextElement.innerText = 
+            this.getDisplayNumber(this.currentOperand) //this current operand is being called  in append number and is being updated here?
         if(this.operation != null){
-        this.previousOperandTextElement.innerText = 
-            `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+            this.previousOperandTextElement.innerText = 
+                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
             this.previousOperandTextElement.innerText = ''
         }
@@ -83,7 +86,7 @@ class Calculator{
 }
 }
 const numberButtons = document.querySelectorAll('[data-number]')
-const operationButtons = document.querySelectorAll('[data-equals]')
+const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
