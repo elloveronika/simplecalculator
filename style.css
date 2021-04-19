@@ -1,4 +1,5 @@
-*::before, *::after{
+*::before, *::after{ 
+    /* thia will affect all elements includung the before and afters */
     box-sizing:border-box;
     font-family: Gotam Rounded, sans-serif;
     font-weight: normal;
@@ -16,7 +17,7 @@ body {
     align-content: center;
     min-height: 100vh;/*this will fill 100% of the height vertically*/
     grid-template-columns: repeat(4, 100px);/*this will break into rows at 100px wide*/
-    grid-template-rows: minmax(120px,auto) repeat(5, 100px);
+    grid-template-rows: minmax(120px,auto) repeat(5, 100px);/* this will grow at minimun and at max is auto so as bog as it needs to be*/
 }
 .calculator-grid > button {
     cursor: pointer;
@@ -26,24 +27,24 @@ body {
     
 }
 .calculator-grid > button:hover {
-    background-color: rgba(255, 255, 255, -9);
+    background-color: rgba(255, 255, 255, .9);
 
 }
 .span-two {
-    grid-column: span 2; /*takes up space for 2 columns*/
+    grid-column: span 2; /*takes up space for 2 columns takes up the enttire witdh*/
 }
-.output {
-    grid-column: 1 / -1;
+.output { /* this is the black box*/
+    grid-column: 1 / -1; /*this aligns to the grid*/
     background-color: rgba(0, 0, 0 , .75);
-    display: flex;
+    display: flex; /*this will align the items inside the box */
     align-items: flex-end;
     justify-content: space-around; /*have equal space around*/
-    flex-direction: column;
+    flex-direction: column;/* self explanatory but will go across instead of row*/
     padding: 10px;
     word-wrap: break-word; /*this will allow us to break our words thus creating the wrap*/
 }
 .output .previous-operand { /*inside of our output in the previous operand*/
-    color: rgba(255, 255, 255, .75);
+    color: rgba(255, 255, 255, .75); /* this will keep the previous operand will be lighter*/
     font-size: 1.5rem;
 
 }

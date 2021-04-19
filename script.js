@@ -1,33 +1,33 @@
-class Calculator {
+class Calculator {//
     constructor(previousOperandTextElement , currentOperandTextElement){// this will take all the inputs and constructors
-        this.previousOperandTextElement = previousOperandTextElement
+        this.previousOperandTextElement = previousOperandTextElement // once the input is in the element it will grab the input
         this.currentOperandTextElement = currentOperandTextElement
-        this.clear()
+        this.clear()/// sets an empty string to set it up for numbers
     }//now we will create functions that will run when given each command, it will clear out our variables
     
-    clear() {
+    clear() {// this will clear remove all the values
         this.currentOperand = ''
-        this.previousOperand = ''
-        this.operation = undefined
+        this.previousOperand = '' // this will set them all to deafult
+        this.operation = undefined // since they dont have any operation when they clear things
     }
     delete() {
         this.currentOperand = this.currentOperand.toString().slice(0,-1) //we wanna go, this will take all the different number and will save in this variable
     }
-    appendNumber(number) { //this passes the numder thru the function
+    appendNumber(number) { //this passes the numder thru the function // we wan to append or in other words , concatinate
         if(number === "." && this.currentOperand.includes('.')) return // we are going to hvae to stop decimals from printing out , the return stops it from functioning
         this.currentOperand = this.currentOperand.toString() + number.toString() //we wanna convert it into a string this way we can add something to the end,, th reason why would be bacause javascript will want to add each number instead of appending them ..concatinate them we want 1+1 = 11 instead of 1+1 =2 here
     }
-    chooseOperation(operation) {
+    chooseOperation(operation) { 
         if(this.currentOperand === '') return // again this stops the funtion
         if(this.previousOperand !== ''){
-            this.compute()
+            this.compute() // this is connected to the operation creating an empty string
         }
         this.operation = operation
         this.previousOperand = this.currentOperand
         this.currentOperand = ''
 
     }
-    compute() {
+    compute() { // take the values and compute them
         let computation
         const prev = parseFloat(this.previousOperand)//this will be the number version of our nubers
         const current = parseFloat(this.currentOperand)
@@ -48,24 +48,24 @@ class Calculator {
             default:
                 return
         }
-        this.currentOperand = computation
+        this.currentOperand = computation //this will be the reult of our computation
         this.operation = undefined
         this.previousOperand = ''
 
     }
-    getDisplayNumber(number){
-        const stringNumber = number.toString()
-        const integerDigits = parseFloat(stringNumber.split('.')[0])
+    getDisplayNumber(number){ // this is a helper funciton , it grabs everything in diplay 
+        const stringNumber = number.toString() // we want a string because we want to split after decimial
+        const integerDigits = parseFloat(stringNumber.split('.')[0])// parse flot the number before the decimal// we are going to turn into a string beffore and after peiod
         const decimalDigits = stringNumber.split('.')[1]
         let integerDisplay
-        if (isNaN(integerDigits)){
+        if (isNaN(integerDigits)){ // if integer displays nothing or something
             integerDisplay = ''
         } else {
-         integerDisplay = integerDigits.toLocaleString('en', {
-            maximumFractionDigits: 0 })
+         integerDisplay = integerDigits.toLocaleString('en', { // we wanto set a maximun so taht there is no mor decimal places 
+            maximumFractionDigits: 0 }) //no decimal points can be added after
         }
         if(decimalDigits != null) {
-            return `${integerDisplay}.${decimalDigits}`
+            return `${integerDisplay}.${decimalDigits}` //if they dont have any decimal digitd they will not show up on disply
         }else{
             return integerDisplay
         }
@@ -76,7 +76,7 @@ class Calculator {
     updateDisplay() { //this will update the display
         this.currentOperandTextElement.innerText = 
             this.getDisplayNumber(this.currentOperand) //this current operand is being called  in append number and is being updated here?
-        if(this.operation != null){
+        if(this.operation != null){ // if our input is a number we want to concatenate the operation so like 12 +
             this.previousOperandTextElement.innerText = 
                 `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         } else {
@@ -85,7 +85,7 @@ class Calculator {
     //this updates anytime a button is pressed
 }
 }
-const numberButtons = document.querySelectorAll('[data-number]')
+const numberButtons = document.querySelectorAll('[data-number]')// you select data attributes with []
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
